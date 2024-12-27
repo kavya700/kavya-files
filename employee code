@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+// Structure to store employee details
+struct Employee {
+    char name[50];
+    float hoursWorked;
+    float hourlyRate;
+    float salary;
+};
+
+// Function to calculate salary
+void calculateSalary(struct Employee *emp) {
+    emp->salary = emp->hoursWorked * emp->hourlyRate;
+}
+
+// Main function
+int main() {
+    int numEmployees, i;
+
+    // Asking for the number of employees
+    printf("Enter the number of employees: ");
+    scanf("%d", &numEmployees);
+
+    // Create an array of employees
+    struct Employee employees[numEmployees];
+
+    // Taking input for each employee
+    for(i = 0; i < numEmployees; i++) {
+        printf("\nEnter details for employee %d\n", i + 1);
+
+        // Input employee name, hours worked, and hourly rate
+        printf("Enter name: ");
+        getchar(); // To consume any leftover newline character from previous input
+        fgets(employees[i].name, sizeof(employees[i].name), stdin);
+
+        printf("Enter hours worked: ");
+        scanf("%f", &employees[i].hoursWorked);
+
+        printf("Enter hourly rate: ");
+        scanf("%f", &employees[i].hourlyRate);
+
+        // Calculate the salary for the employee
+        calculateSalary(&employees[i]);
+    }
+
+    // Display the details of all employees
+    printf("\nEmployee Payroll Information:\n");
+    printf("--------------------------------------------------\n");
+    printf("Name\t\tHours Worked\tHourly Rate\tSalary\n");
+    printf("--------------------------------------------------\n");
+
+    for(i = 0; i < numEmployees; i++) {
+        printf("%s\t%.2f\t\t%.2f\t\t%.2f\n", employees[i].name, employees[i].hoursWorked, employees[i].hourlyRate, employees[i].salary);
+    }
+
+    return 0;
+}
